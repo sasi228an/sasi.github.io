@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Мой сайт</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #1a1714;
+    --cream: #f5f0e8;
+    --warm: #ede7d9;
+    --accent: #c0392b;
+    --accent2: #2c5f6e;
+    --gold: #b8860b;
+    --muted: #6b6460;
+    --card-bg: #ffffff;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Raleway', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: var(--ink);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2.5rem;
+    height: 56px;
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: var(--cream);
+    letter-spacing: 0.05em;
+    text-decoration: none;
+  }
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+  .nav-links a {
+    color: #b0a89e;
+    text-decoration: none;
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--cream); }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    background: var(--ink);
+    padding: 7rem 2.5rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bg-text {
+    position: absolute;
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(8rem, 22vw, 20rem);
+    font-weight: 900;
+    color: rgba(255,255,255,0.03);
+    right: -2%;
+    bottom: -5%;
+    line-height: 1;
+    user-select: none;
+    pointer-events: none;
+  }
+  .hero-inner {
+    max-width: 860px;
+    position: relative;
+    z-index: 1;
+  }
+  .hero-tag {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    padding: 4px 14px;
+    margin-bottom: 2rem;
+  }
+  .hero-inner h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 8vw, 6.5rem);
+    font-weight: 900;
+    color: var(--cream);
+    line-height: 1.05;
+    margin-bottom: 1.5rem;
+  }
+  .hero-inner h1 em {
+    font-style: italic;
+    color: #c09a6b;
+  }
+  .hero-inner p {
+    font-size: 1.1rem;
+    color: #8a7f79;
+    max-width: 540px;
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+  }
+  .hero-cta {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    text-decoration: none;
+    padding: 14px 36px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: background 0.25s;
+  }
+  .hero-cta:hover { background: #a93226; }
+  .hero-scroll {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: #5a504a;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+  .hero-scroll::after {
+    content: '';
+    width: 1px;
+    height: 40px;
+    background: #5a504a;
+    animation: scrollpulse 2s ease-in-out infinite;
+  }
+  @keyframes scrollpulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+  }
+
+  /* ── SECTION BASE ── */
+  section { padding: 6rem 2.5rem; }
+  .section-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 1.25rem;
+  }
+  .section-sub {
+    font-size: 1rem;
+    color: var(--muted);
+    max-width: 520px;
+    font-weight: 300;
+    margin-bottom: 3rem;
+  }
+  .container { max-width: 1120px; margin: 0 auto; }
+  .divider {
+    width: 48px;
+    height: 2px;
+    background: var(--accent);
+    margin: 1.5rem 0;
+  }
+
+  /* ── ABOUT ── */
+  #about { background: var(--cream); }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+  .about-img {
+    aspect-ratio: 4/5;
+    background: var(--ink);
+    position: relative;
+    overflow: hidden;
+  }
+  .about-img-inner {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #2c1810 0%, #1a1714 60%, #0d1a20 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .about-img-inner svg { opacity: 0.15; width: 60%; }
+  .about-badge {
+    position: absolute;
+    bottom: -20px;
+    right: -20px;
+    width: 110px;
+    height: 110px;
+    background: var(--accent);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+  }
+  .about-badge strong {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    font-weight: 900;
+    line-height: 1;
+  }
+  .about-badge span { font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; }
+  .about-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+  }
+  .stat-item { border-top: 2px solid var(--accent); padding-top: 1rem; }
+  .stat-item strong {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    font-weight: 900;
+    display: block;
+    line-height: 1;
+  }
+  .stat-item span { font-size: 0.78rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; }
+
+  /* ── SERVICES ── */
+  #services { background: var(--warm); }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5px;
+    background: #ccc5b8;
+  }
+  .service-card {
+    background: var(--card-bg);
+    padding: 2.5rem 2rem;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s;
+  }
+  .service-card:hover { transform: translateY(-4px); }
+  .service-card::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 100%;
+    height: 3px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s;
+  }
+  .service-card:hover::before { transform: scaleX(1); }
+  .service-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: var(--warm);
+    line-height: 1;
+    margin-bottom: 1rem;
+  }
+  .service-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.35rem;
+    margin-bottom: 0.75rem;
+  }
+  .service-card p { font-size: 0.9rem; color: var(--muted); line-height: 1.65; }
+
+  /* ── PORTFOLIO ── */
+  #portfolio { background: var(--ink); }
+  #portfolio .section-title { color: var(--cream); }
+  #portfolio .section-sub { color: #6a605a; }
+  #portfolio .section-label { color: #c09a6b; }
+  #portfolio .divider { background: #c09a6b; }
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto auto;
+    gap: 16px;
+  }
+  .portfolio-item {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    background: #2a2520;
+  }
+  .portfolio-item:first-child {
+    grid-column: 1 / 3;
+  }
+  .portfolio-img {
+    aspect-ratio: 16/9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 4rem;
+    font-weight: 900;
+    color: rgba(255,255,255,0.05);
+    transition: transform 0.5s;
+  }
+  .portfolio-item:first-child .portfolio-img {
+    font-size: 7rem;
+  }
+  .portfolio-item:hover .portfolio-img { transform: scale(1.04); }
+  .pi-a { background: #1e2d35; }
+  .pi-b { background: #2d1e20; }
+  .pi-c { background: #1e2820; }
+  .pi-d { background: #25201a; }
+  .portfolio-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(192,57,43,0.0);
+    display: flex;
+    align-items: flex-end;
+    padding: 1.5rem;
+    transition: background 0.3s;
+  }
+  .portfolio-item:hover .portfolio-overlay { background: rgba(192,57,43,0.75); }
+  .portfolio-label {
+    opacity: 0;
+    transform: translateY(8px);
+    transition: all 0.3s;
+    color: white;
+  }
+  .portfolio-item:hover .portfolio-label { opacity: 1; transform: translateY(0); }
+  .portfolio-label h4 { font-family: 'Playfair Display', serif; font-size: 1.1rem; }
+  .portfolio-label span { font-size: 0.75rem; opacity: 0.8; }
+
+  /* ── TEAM ── */
+  #team { background: var(--cream); }
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+  }
+  .team-card { text-align: center; }
+  .team-avatar {
+    width: 100%;
+    aspect-ratio: 1;
+    background: var(--ink);
+    margin-bottom: 1.25rem;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .team-initials {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: rgba(255,255,255,0.12);
+  }
+  .ta-a { background: #1a2830; }
+  .ta-b { background: #2a1a1a; }
+  .ta-c { background: #1a2820; }
+  .ta-d { background: #252015; }
+  .team-card h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    margin-bottom: 0.25rem;
+  }
+  .team-card .role {
+    font-size: 0.75rem;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-weight: 600;
+  }
+  .team-card p { font-size: 0.85rem; color: var(--muted); margin-top: 0.75rem; }
+
+  /* ── BLOG ── */
+  #blog { background: var(--warm); }
+  .blog-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 3rem;
+  }
+  .blog-main {}
+  .post-featured {
+    background: var(--card-bg);
+    padding: 0;
+    overflow: hidden;
+  }
+  .post-featured-header {
+    height: 280px;
+    background: var(--ink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 6rem;
+    font-weight: 900;
+    color: rgba(255,255,255,0.05);
+  }
+  .post-featured-body { padding: 2rem; }
+  .post-tag {
+    display: inline-block;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+  }
+  .post-featured-body h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    margin-bottom: 0.75rem;
+    line-height: 1.2;
+  }
+  .post-featured-body p { font-size: 0.9rem; color: var(--muted); }
+  .post-meta { font-size: 0.75rem; color: var(--muted); margin-top: 1.25rem; }
+  .blog-sidebar {}
+  .sidebar-title {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid #ccc5b8;
+  }
+  .mini-post {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #ccc5b8;
+  }
+  .mini-post:last-child { border-bottom: none; }
+  .mini-thumb {
+    width: 70px;
+    height: 70px;
+    flex-shrink: 0;
+    background: var(--ink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 900;
+    color: rgba(255,255,255,0.1);
+  }
+  .mt-a { background: #1a2830; }
+  .mt-b { background: #2a1a1a; }
+  .mt-c { background: #1a2820; }
+  .mini-post h4 { font-size: 0.88rem; font-weight: 600; line-height: 1.3; margin-bottom: 0.3rem; }
+  .mini-post span { font-size: 0.72rem; color: var(--muted); }
+
+  /* ── CONTACT ── */
+  #contact { background: var(--ink); padding: 6rem 2.5rem; }
+  #contact .section-title { color: var(--cream); }
+  #contact .section-sub { color: #6a605a; }
+  #contact .section-label { color: #c09a6b; }
+  #contact .divider { background: #c09a6b; }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+  }
+  .contact-info { }
+  .contact-item {
+    display: flex;
+    gap: 1.25rem;
+    margin-bottom: 2rem;
+    align-items: flex-start;
+  }
+  .contact-icon {
+    width: 44px;
+    height: 44px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .contact-icon svg { width: 18px; height: 18px; }
+  .contact-item h4 { font-size: 0.75rem; color: #6a605a; text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 0.25rem; }
+  .contact-item p { color: var(--cream); font-size: 0.95rem; }
+  .contact-form { display: flex; flex-direction: column; gap: 1px; background: #2a2520; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; }
+  .form-field {
+    background: #0e0c0a;
+    padding: 1.25rem 1.5rem;
+  }
+  .form-field label {
+    display: block;
+    font-size: 0.68rem;
+    color: #5a504a;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 0.5rem;
+  }
+  .form-field input,
+  .form-field textarea {
+    width: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--cream);
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.95rem;
+    resize: none;
+  }
+  .form-field input::placeholder,
+  .form-field textarea::placeholder { color: #3a3530; }
+  .form-field textarea { height: 100px; }
+  .form-submit {
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 1.25rem 2rem;
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s;
+    align-self: flex-start;
+    margin-top: 1px;
+  }
+  .form-submit:hover { background: #a93226; }
+
+  /* ── FAQ ── */
+  #faq { background: var(--cream); }
+  .faq-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 5rem;
+  }
+  .faq-list { }
+  .faq-item {
+    border-bottom: 1px solid #ccc5b8;
+    padding: 1.5rem 0;
+    cursor: pointer;
+  }
+  .faq-item:first-child { border-top: 1px solid #ccc5b8; }
+  .faq-q {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 600;
+    font-size: 0.95rem;
+  }
+  .faq-q::after {
+    content: '+';
+    font-size: 1.5rem;
+    color: var(--accent);
+    line-height: 1;
+    transition: transform 0.2s;
+  }
+  .faq-item.open .faq-q::after { transform: rotate(45deg); }
+  .faq-a {
+    font-size: 0.88rem;
+    color: var(--muted);
+    line-height: 1.7;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease, padding-top 0.2s;
+  }
+  .faq-item.open .faq-a {
+    max-height: 200px;
+    padding-top: 0.75rem;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #0d0b0a;
+    padding: 2rem 2.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    color: #3a3530;
+  }
+  footer p { font-size: 0.75rem; color: #3a3530; }
+
+  /* ── ANIMATIONS ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (max-width: 900px) {
+    .about-grid, .contact-grid, .faq-grid, .blog-grid { grid-template-columns: 1fr; }
+    .team-grid { grid-template-columns: repeat(2, 1fr); }
+    .services-grid { grid-template-columns: 1fr; }
+    .portfolio-grid { grid-template-columns: 1fr 1fr; }
+    .portfolio-item:first-child { grid-column: 1 / -1; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#hero" class="nav-logo">Студия</a>
+  <ul class="nav-links">
+    <li><a href="#about">О нас</a></li>
+    <li><a href="#services">Услуги</a></li>
+    <li><a href="#portfolio">Портфолио</a></li>
+    <li><a href="#team">Команда</a></li>
+    <li><a href="#blog">Блог</a></li>
+    <li><a href="#contact">Контакты</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg-text">С</div>
+  <div class="hero-inner reveal">
+    <div class="hero-tag">Добро пожаловать</div>
+    <h1>Создаём<br><em>смыслы</em><br>и идеи</h1>
+    <p>Мы помогаем брендам находить свой голос и рассказывать истории, которые остаются в памяти.</p>
+    <a href="#services" class="hero-cta">Посмотреть услуги</a>
+  </div>
+  <div class="hero-scroll">Скролл</div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid reveal">
+      <div class="about-img">
+        <div class="about-img-inner">
+          <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="40" stroke="white" stroke-width="0.5"/>
+            <circle cx="50" cy="50" r="25" stroke="white" stroke-width="0.5"/>
+            <line x1="10" y1="50" x2="90" y2="50" stroke="white" stroke-width="0.5"/>
+            <line x1="50" y1="10" x2="50" y2="90" stroke="white" stroke-width="0.5"/>
+          </svg>
+        </div>
+        <div class="about-badge">
+          <strong>12</strong>
+          <span>лет опыта</span>
+        </div>
+      </div>
+      <div>
+        <div class="section-label">О нас</div>
+        <h2 class="section-title">Мы — команда<br>творческих людей</h2>
+        <div class="divider"></div>
+        <p style="color: var(--muted); margin-bottom: 1rem; font-weight: 300;">Мы занимаемся созданием цифровых продуктов, брендинга и визуальных коммуникаций уже более десяти лет. Каждый проект — это новая история, которую мы рассказываем через дизайн.</p>
+        <p style="color: var(--muted); font-weight: 300; font-size: 0.93rem;">Наш подход основан на глубоком понимании задач клиента и стремлении к совершенству в каждой детали.</p>
+        <div class="about-stats">
+          <div class="stat-item"><strong>240+</strong><span>Проектов</span></div>
+          <div class="stat-item"><strong>98%</strong><span>Довольных клиентов</span></div>
+          <div class="stat-item"><strong>18</strong><span>Наград</span></div>
+          <div class="stat-item"><strong>7</strong><span>Стран</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="container">
+    <div class="reveal" style="margin-bottom: 3rem;">
+      <div class="section-label">Что мы делаем</div>
+      <h2 class="section-title">Наши услуги</h2>
+      <div class="divider"></div>
+      <p class="section-sub">Полный спектр услуг для создания и развития вашего цифрового присутствия.</p>
+    </div>
+    <div class="services-grid reveal">
+      <div class="service-card">
+        <div class="service-num">01</div>
+        <h3>Веб-дизайн</h3>
+        <p>Создаём сайты, которые не только красиво выглядят, но и решают бизнес-задачи. UX/UI на высшем уровне.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-num">02</div>
+        <h3>Брендинг</h3>
+        <p>Разрабатываем визуальный язык бренда: логотип, фирменный стиль, руководство по использованию.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-num">03</div>
+        <h3>Разработка</h3>
+        <p>Воплощаем дизайн в жизнь — от лендингов до сложных веб-приложений с современным стеком технологий.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-num">04</div>
+        <h3>Контент</h3>
+        <p>Тексты, фото, видео — создаём контент, который цепляет аудиторию и усиливает ценность бренда.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-num">05</div>
+        <h3>SEO & Аналитика</h3>
+        <p>Продвигаем сайты в поисковых системах и настраиваем аналитику для принятия обоснованных решений.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-num">06</div>
+        <h3>Поддержка</h3>
+        <p>Технический мониторинг, обновления и оперативная помощь — мы всегда на связи после запуска.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section id="portfolio">
+  <div class="container">
+    <div class="reveal" style="margin-bottom: 3rem;">
+      <div class="section-label">Наши работы</div>
+      <h2 class="section-title">Портфолио</h2>
+      <div class="divider"></div>
+      <p class="section-sub">Избранные проекты, которыми мы гордимся.</p>
+    </div>
+    <div class="portfolio-grid reveal">
+      <div class="portfolio-item">
+        <div class="portfolio-img pi-a">ALPHA</div>
+        <div class="portfolio-overlay">
+          <div class="portfolio-label">
+            <h4>Alpha Platform</h4>
+            <span>Веб-приложение · 2024</span>
+          </div>
+        </div>
+      </div>
+      <div class="portfolio-item">
+        <div class="portfolio-img pi-b" style="font-size:2.5rem;">NOVA</div>
+        <div class="portfolio-overlay">
+          <div class="portfolio-label">
+            <h4>Nova Branding</h4>
+            <span>Фирменный стиль · 2024</span>
+          </div>
+        </div>
+      </div>
+      <div class="portfolio-item">
+        <div class="portfolio-img pi-c" style="font-size:2.5rem;">ECO</div>
+        <div class="portfolio-overlay">
+          <div class="portfolio-label">
+            <h4>Eco Store</h4>
+            <span>E-commerce · 2023</span>
+          </div>
+        </div>
+      </div>
+      <div class="portfolio-item">
+        <div class="portfolio-img pi-d" style="font-size:2.5rem;">LUMI</div>
+        <div class="portfolio-overlay">
+          <div class="portfolio-label">
+            <h4>Lumi App</h4>
+            <span>Мобильный дизайн · 2023</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section id="team">
+  <div class="container">
+    <div class="reveal" style="margin-bottom: 3rem;">
+      <div class="section-label">Наша команда</div>
+      <h2 class="section-title">Люди, которые<br>создают магию</h2>
+      <div class="divider"></div>
+    </div>
+    <div class="team-grid reveal">
+      <div class="team-card">
+        <div class="team-avatar ta-a"><div class="team-initials">АМ</div></div>
+        <h4>Алексей Морозов</h4>
+        <div class="role">Арт-директор</div>
+        <p>Более 10 лет в визуальных коммуникациях. Любит минимализм и японскую эстетику.</p>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar ta-b"><div class="team-initials">ЕС</div></div>
+        <h4>Екатерина Смирнова</h4>
+        <div class="role">UX-дизайнер</div>
+        <p>Исследует пользователей и создаёт интерфейсы, которые просто работают.</p>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar ta-c"><div class="team-initials">ДК</div></div>
+        <h4>Дмитрий Козлов</h4>
+        <div class="role">Frontend разработчик</div>
+        <p>Пишет чистый код и следит за тем, чтобы анимации были плавными.</p>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar ta-d"><div class="team-initials">МВ</div></div>
+        <h4>Мария Волкова</h4>
+        <div class="role">Стратег</div>
+        <p>Анализирует рынок и помогает клиентам найти верное направление.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BLOG -->
+<section id="blog">
+  <div class="container">
+    <div class="reveal" style="margin-bottom: 3rem;">
+      <div class="section-label">Статьи и мысли</div>
+      <h2 class="section-title">Блог</h2>
+      <div class="divider"></div>
+    </div>
+    <div class="blog-grid reveal">
+      <div class="blog-main">
+        <div class="post-featured">
+          <div class="post-featured-header">✦</div>
+          <div class="post-featured-body">
+            <div class="post-tag">Дизайн</div>
+            <h3>Почему простота — это не скука, а высший пилотаж</h3>
+            <p>Мы живём в эпоху информационного шума. Каждый бренд кричит, машет руками и требует внимания. В этих условиях тишина становится роскошью, а простота — суперсилой.</p>
+            <div class="post-meta">15 апреля 2025 · 5 минут чтения</div>
+          </div>
+        </div>
+      </div>
+      <div class="blog-sidebar">
+        <div class="sidebar-title">Последние записи</div>
+        <div class="mini-post">
+          <div class="mini-thumb mt-a">Т</div>
+          <div>
+            <h4>Типографика как инструмент эмоций</h4>
+            <span>10 апреля · Дизайн</span>
+          </div>
+        </div>
+        <div class="mini-post">
+          <div class="mini-thumb mt-b">Б</div>
+          <div>
+            <h4>Брендинг для стартапов: с чего начать</h4>
+            <span>3 апреля · Бизнес</span>
+          </div>
+        </div>
+        <div class="mini-post">
+          <div class="mini-thumb mt-c">А</div>
+          <div>
+            <h4>Анимация, которая не раздражает</h4>
+            <span>28 марта · UI/UX</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-grid reveal">
+      <div>
+        <div class="section-label">Напишите нам</div>
+        <h2 class="section-title" style="color: var(--cream);">Начнём<br>работать вместе</h2>
+        <div class="divider"></div>
+        <p class="section-sub">Расскажите о вашем проекте — мы ответим в течение одного рабочего дня.</p>
+        <div class="contact-item">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#c09a6b" stroke-width="1.5"><path d="M3 8l9 6 9-6M3 8v10a1 1 0 001 1h16a1 1 0 001-1V8M3 8a1 1 0 011-1h16a1 1 0 011 1"/></svg>
+          </div>
+          <div>
+            <h4>Email</h4>
+            <p>hello@studiya.ru</p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#c09a6b" stroke-width="1.5"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+          </div>
+          <div>
+            <h4>Телефон</h4>
+            <p>+7 (495) 123-45-67</p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#c09a6b" stroke-width="1.5"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          </div>
+          <div>
+            <h4>Адрес</h4>
+            <p>Москва, ул. Тверская, 1</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="contact-form">
+          <div class="form-row">
+            <div class="form-field">
+              <label>Имя</label>
+              <input type="text" placeholder="Иван Петров">
+            </div>
+            <div class="form-field">
+              <label>Email</label>
+              <input type="email" placeholder="ivan@mail.ru">
+            </div>
+          </div>
+          <div class="form-field">
+            <label>Тема</label>
+            <input type="text" placeholder="О чём хотите поговорить?">
+          </div>
+          <div class="form-field">
+            <label>Сообщение</label>
+            <textarea placeholder="Расскажите о вашем проекте..."></textarea>
+          </div>
+          <button class="form-submit">Отправить сообщение →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="container">
+    <div class="faq-grid reveal">
+      <div>
+        <div class="section-label">Частые вопросы</div>
+        <h2 class="section-title">FAQ</h2>
+        <div class="divider"></div>
+        <p style="color: var(--muted); font-size: 0.9rem; font-weight: 300;">Не нашли ответ? Напишите нам — мы всегда на связи.</p>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item">
+          <div class="faq-q">Сколько стоит разработка сайта?</div>
+          <div class="faq-a">Стоимость зависит от сложности и объёма проекта. Лендинг начинается от 50 000 ₽, корпоративный сайт — от 150 000 ₽. Мы всегда согласовываем бюджет до начала работ.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Как долго длится разработка?</div>
+          <div class="faq-a">Лендинг — 2–3 недели, корпоративный сайт — 6–10 недель. Сроки согласовываются индивидуально и фиксируются в договоре.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Вы работаете с клиентами из других городов?</div>
+          <div class="faq-a">Да, мы работаем удалённо со всей Россией и странами СНГ. Общаемся через видеозвонки, мессенджеры и проектные системы.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Что входит в поддержку после запуска?</div>
+          <div class="faq-a">Первый месяц — бесплатная гарантийная поддержка. Далее предлагаем абонентское обслуживание: обновления, хостинг, мониторинг и консультации.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Делаете ли вы редизайн существующих сайтов?</div>
+          <div class="faq-a">Конечно. Мы анализируем текущий сайт, его аудиторию и метрики, после чего предлагаем обоснованные решения для улучшения.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">Студия</div>
+  <p>© 2025 Все права защищены</p>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  document.querySelectorAll('.faq-item').forEach(item => {
+    item.addEventListener('click', () => {
+      const wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!wasOpen) item.classList.add('open');
+    });
+  });
+</script>
+</body>
+</html>
